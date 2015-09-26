@@ -1,0 +1,7 @@
+name: WGBuyFlags
+main: wgbuyflags.WGBuyFlags
+version: 1.0
+author: _Shevchik_
+commands:
+  wgbuyflag:
+    description: All ProtocolSupport commands
