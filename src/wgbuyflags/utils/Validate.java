@@ -18,8 +18,7 @@ public class Validate {
 		}
 	}
 
-	public static <T> T getNotNull(Callable<T> getFunc, String errMsg) throws Validate.InvalidateException, Exception {
-		T obj = getFunc.call();
+	public static <T> T notNull(T obj, String errMsg) throws Validate.InvalidateException, Exception {
 		if (obj == null) {
 			throw new Validate.InvalidateException(errMsg);
 		}

@@ -36,12 +36,12 @@ public class BuyFlagCommand implements SubCommand {
 			Validate.isTrue(args.length >= 3, ChatColor.RED + "Not enough args");
 			Player player = Validate.cast(() -> (Player) sender, ChatColor.RED + "Only for players");
 
-			RegionManager rm = Validate.getNotNull(() -> WGBukkit.getRegionManager(player.getWorld()), ChatColor.RED + "Regions are disabled in this world");
-			ProtectedRegion region = Validate.getNotNull(() -> rm.getRegion(args[0].toLowerCase()), ChatColor.RED + "Region " + args[0].toLowerCase() + " doesn't exist");
+			RegionManager rm = Validate.notNull(WGBukkit.getRegionManager(player.getWorld()), ChatColor.RED + "Regions are disabled in this world");
+			ProtectedRegion region = Validate.notNull(rm.getRegion(args[0].toLowerCase()), ChatColor.RED + "Region " + args[0].toLowerCase() + " doesn't exist");
 			Validate.isTrue(region.isOwner(WGBukkit.getPlugin().wrapPlayer(player, true)), ChatColor.RED + "You are not an owner of region " + region.getId());
 
-			Flag<?> flag = Validate.getNotNull(() -> Utils.findFlag(args[1].toLowerCase()), ChatColor.RED + "Flag "+args[1].toLowerCase()+" doesn't exist");
-			Double cost = Validate.getNotNull(() -> config.getFlagCost(flag.getName()), ChatColor.RED + "This flag is not available for buying");
+			Flag<?> flag = Validate.notNull(Utils.findFlag(args[1].toLowerCase()), ChatColor.RED + "Flag "+args[1].toLowerCase()+" doesn't exist");
+			Double cost = Validate.notNull(config.getFlagCost(flag.getName()), ChatColor.RED + "This flag is not available for buying");
 			Validate.isTrue(econ.getBalance(player) >= cost, ChatColor.RED + "You don't have enough money to buy this flag");
 
 			econ.withdrawPlayer(player, cost);

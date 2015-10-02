@@ -25,7 +25,7 @@ public class Commands implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		SubCommand subcmd;
 		try {
-			subcmd = Validate.getNotNull(() -> subcmds.get(args[0].toLowerCase()), ChatColor.RED + "Subcommand does not exist");
+			subcmd = Validate.notNull(subcmds.get(args[0].toLowerCase()), ChatColor.RED + "Subcommand does not exist");
 			subcmd.execute(sender, Arrays.copyOfRange(args, 1, args.length));
 		} catch (Validate.InvalidateException e) {
 			sender.sendMessage(e.getMessage());

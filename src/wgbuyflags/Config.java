@@ -32,9 +32,7 @@ public class Config {
 		flagsCost.clear();
 		ConfigurationSection section = config.getConfigurationSection("cost");
 		if (section != null) {
-			for (String flag : section.getKeys(false)) {
-				flagsCost.put(flag.toLowerCase(), section.getDouble(flag));
-			}
+			section.getKeys(false).forEach(flag -> flagsCost.put(flag.toLowerCase(), section.getDouble(flag)));
 		}
 		saveConfig();
 	}
